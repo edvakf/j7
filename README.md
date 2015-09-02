@@ -2,6 +2,8 @@
 
 Filter stdin to stdout with JavaScript
 
+[![Build Status](https://travis-ci.org/edvakf/j7.svg)](https://travis-ci.org/edvakf/j7)
+
 ## Usage
 
 ```
