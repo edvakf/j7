@@ -43,3 +43,15 @@ $ echo "[1,2,3]\n[4,5,6]" | j7 -l -j 'function main(input){return input[0]}'
 4
 ```
 
+## About V7
+
+j7 makes use of the [V7 JavaScript engine](https://github.com/cesanta/v7),
+a very small JavaScript engine for embedded devices, and it's go binding [gov7](https://github.com/edvakf/gov7).
+
+The JavaScript may therefore behave differently from what runs in web browsers.
+For example, to my knowledge, `JSON.stringify` only outputs the first 100 bytes.
+The `-j` option increases the limit heuristically, but you may sometimes want to specify it with the `-n` option by yourself.
+
+## LICENSE
+
+Because V7 is distributed under the GPLv2, j7 has also adopted GPLv2.
