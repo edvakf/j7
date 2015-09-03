@@ -1,13 +1,8 @@
 language: go
 go:
   - 1.5
-before_install:
-  - go get github.com/mitchellh/gox
-  - go get github.com/tcnksm/ghr
 install:
   - go get -d -v ./...
 script:
-  - go test -v ./...
-after_success:
-  - $GOPATH/bin/gox -cgo -output "dist/{{.OS}}_{{.Arch}}_{{.Dir}}"
-  - $GOPATH/bin/ghr --username edvakf --token $GITHUB_TOKEN --replace --prerelease --debug pre-release dist/
+  - go install ./...
+  - PATH=$PATH:$GOPATH/bin/path ./run_test.sh
