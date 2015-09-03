@@ -2,25 +2,25 @@
 
 cd $(dirname $0)
 
-ACTUAL="$(cat test/1.in.txt | j7 'function main(input) {return JSON.parse(input).join(":")}')"
+ACTUAL="$(echo "[1,2,3]" | j7 'function main(input) {return JSON.parse(input).join(":")}')"
 echo $ACTUAL
-EXPECTED="$(cat test/1.out.txt)"
+EXPECTED="1:2:3"
 if [ "$ACTUAL" != "$EXPECTED" ]; then
   echo "FAIL: basic usage"
   exit 1
 fi
 
-ACTUAL="$(cat test/1.in.txt | j7 -m foo 'function foo(input) {return JSON.parse(input).join(":")}')"
+ACTUAL="$(echo "[1,2,3]" | j7 -m foo 'function foo(input) {return JSON.parse(input).join(":")}')"
 echo $ACTUAL
-EXPECTED="$(cat test/1.out.txt)"
+EXPECTED="1:2:3"
 if [ "$ACTUAL" != "$EXPECTED" ]; then
   echo "FAIL: -m to change entry point name"
   exit 1
 fi
 
-ACTUAL="$(cat test/1.in.txt | j7 'window={}' @test/1.js 'function main(input) {return new window.joiner(":").join(JSON.parse(input))}')"
+ACTUAL="$(echo "[1,2,3]" | j7 'window={}' @test/1.js 'function main(input) {return new window.joiner(":").join(JSON.parse(input))}')"
 echo $ACTUAL
-EXPECTED="$(cat test/1.out.txt)"
+EXPECTED="1:2:3"
 if [ "$ACTUAL" != "$EXPECTED" ]; then
   echo "FAIL: evaluate file"
   exit 1
@@ -33,4 +33,5 @@ if [ "$ACTUAL" != "$EXPECTED" ]; then
   echo "FAIL: line mode"
   exit 1
 fi
+
 
